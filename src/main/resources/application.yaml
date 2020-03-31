@@ -1,0 +1,25 @@
+spring:
+  rabbitmq:
+    addresses: 127.0.0.1
+  cloud:
+    stream:
+      bindings:
+        input:
+          binder: kafka
+          destination: test
+          group: input-group-1
+        output:
+          binder: kafka
+          destination: test
+          group: output-group-1
+      default-binder: kafka
+#      kafka:
+#        binder:
+#          brokers:
+#          defaultBrokerPort:
+logging:
+  level:
+    li:
+      doerf: DEBUG
+  #file: log/application.log
+
