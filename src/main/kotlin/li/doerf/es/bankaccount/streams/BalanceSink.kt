@@ -1,18 +1,26 @@
 package li.doerf.es.bankaccount.streams
 
-import li.doerf.es.bankaccount.dto.CreditRequest
+import li.doerf.es.bankaccount.services.AccountService
 import li.doerf.es.bankaccount.utils.getLogger
 import org.springframework.cloud.stream.annotation.EnableBinding
 import org.springframework.cloud.stream.annotation.StreamListener
+import org.springframework.messaging.handler.annotation.Payload
 
 @EnableBinding(BalanceStreams::class)
-class BalanceSink {
+class BalanceSink(val accountService: AccountService) {
 
     private val logger = getLogger(this::class.java)
 
-    @StreamListener("balanceIn")
-    fun handle(request: CreditRequest) {
-        logger.debug("handle: $request")
+    @StreamListener("balanceIn", condition = "headers['type']=='add'")
+    fun handleCredit(@Payload request: AddAmount) {
+        logger.debug("handle credit: $request")
+        accountService.credit(request.account, request.amount)
+    }
+
+    @StreamListener("balanceIn", condition = "headers['type']=='remove'")
+    fun handleDebit(@Payload request: RemoveAmount) {
+        logger.debug("handle debit: $request")
+        accountService.debit(request.account, request.amount)
     }
 
 }
