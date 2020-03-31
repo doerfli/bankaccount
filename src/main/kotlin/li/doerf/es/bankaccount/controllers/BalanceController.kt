@@ -20,7 +20,7 @@ class BalanceController(private val producer: BalanceProducer) {
     @PostMapping("/credit")
     fun credit(@RequestBody request: CreditRequest): ResponseEntity<HttpStatus> {
         logger.debug("received credit request $request")
-        producer.source.output().send(
+        producer.balanceStreams.balanceOut().send(
                 MessageBuilder.withPayload(request).build())
         return ResponseEntity.ok().build()
     }

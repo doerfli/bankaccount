@@ -4,13 +4,13 @@ spring:
   cloud:
     stream:
       bindings:
-        input:
+        balanceIn:
           binder: kafka
-          destination: test
+          destination: balance
           group: input-group-1
-        output:
+        balanceOut:
           binder: kafka
-          destination: test
+          destination: balance
           group: output-group-1
       default-binder: kafka
 #      kafka:
