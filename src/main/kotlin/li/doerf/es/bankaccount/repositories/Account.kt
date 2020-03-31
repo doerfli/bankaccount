@@ -1,8 +1,12 @@
 package li.doerf.es.bankaccount.repositories
 
-import org.springframework.data.annotation.Id
-import org.springframework.data.redis.core.RedisHash
 import java.math.BigDecimal
+import javax.persistence.Entity
+import javax.persistence.GeneratedValue
+import javax.persistence.Id
 
-@RedisHash("Account")
-data class Account(@Id val accountNumber: String, var balance: BigDecimal = BigDecimal.ZERO)
+@Entity
+data class Account(
+        @Id @GeneratedValue val id: Long? = null,
+        val accountNumber: String,
+        var balance: BigDecimal = BigDecimal.ZERO)

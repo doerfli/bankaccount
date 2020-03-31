@@ -12,13 +12,13 @@ class BalanceSink(val accountService: AccountService) {
     private val logger = getLogger(this::class.java)
 
     @StreamListener("balanceIn", condition = "headers['type']=='add'")
-    fun handleCredit(@Payload request: AddAmount) {
+    fun handleCredit(@Payload request: AmountAdded) {
         logger.debug("handle credit: $request")
         accountService.credit(request.account, request.amount)
     }
 
     @StreamListener("balanceIn", condition = "headers['type']=='remove'")
-    fun handleDebit(@Payload request: RemoveAmount) {
+    fun handleDebit(@Payload request: AmountRemoved) {
         logger.debug("handle debit: $request")
         accountService.debit(request.account, request.amount)
     }

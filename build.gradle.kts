@@ -5,7 +5,7 @@ plugins {
 	id("io.spring.dependency-management") version "1.0.9.RELEASE"
 	kotlin("jvm") version "1.3.71"
 	kotlin("plugin.spring") version "1.3.71"
-	id("org.jetbrains.kotlin.plugin.noarg") version "1.3.71"
+	id("org.jetbrains.kotlin.plugin.jpa") version "1.3.71"
 }
 
 
@@ -46,13 +46,15 @@ dependencies {
 //	implementation("org.springframework.boot:spring-boot-starter-amqp")
 	implementation("org.springframework.boot:spring-boot-starter-integration")
 	implementation("org.springframework.boot:spring-boot-starter-web")
-	implementation("org.springframework.boot:spring-boot-starter-data-redis")
+	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	implementation("org.springframework.cloud:spring-cloud-stream")
 //	implementation("org.springframework.cloud:spring-cloud-stream-binder-rabbit")
 	implementation("org.springframework.cloud:spring-cloud-stream-binder-kafka")
+
+	runtimeOnly("com.h2database:h2:1.4.200")
 
 	testImplementation("org.springframework.boot:spring-boot-starter-test") {
 		exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
@@ -72,8 +74,4 @@ tasks.withType<KotlinCompile> {
 		freeCompilerArgs = listOf("-Xjsr305=strict")
 		jvmTarget = "11"
 	}
-}
-
-noArg {
-	annotation("li.doerf.es.bankaccount.utils.NoArg")
 }

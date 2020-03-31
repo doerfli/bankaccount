@@ -1,6 +1,9 @@
 spring:
-  rabbitmq:
-    addresses: 127.0.0.1
+  datasource:
+    url: jdbc:h2:mem:bankaccount
+    driverClassName: org.h2.Driver
+    username: sa
+    password: password
   cloud:
     stream:
       bindings:
@@ -22,4 +25,3 @@ logging:
     li:
       doerf: DEBUG
   #file: log/application.log
-
