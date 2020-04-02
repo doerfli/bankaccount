@@ -9,7 +9,7 @@ import org.springframework.messaging.handler.annotation.Payload
 @EnableBinding(BalanceStreams::class)
 class BalanceSink(val accountService: AccountService) {
 
-    private val logger = getLogger(this::class.java)
+    private val logger = getLogger(javaClass.name)
 
     @StreamListener("balanceIn", condition = "headers['type']=='add'")
     fun handleCredit(@Payload request: AmountAdded) {

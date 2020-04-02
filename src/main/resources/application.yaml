@@ -15,6 +15,10 @@ spring:
           binder: kafka
           destination: balance
           group: output-group-1
+        statementIn:
+          binder: kafka
+          destination: balance
+          group: input-group-2
       default-binder: kafka
 #      kafka:
 #        binder:
