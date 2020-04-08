@@ -16,3 +16,11 @@ services:
       - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
       - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092
       - KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=1
+  application:
+    build: .
+    depends_on:
+      - kafka
+    environment:
+      - SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS=kafka
+    ports:
+      - 8080:8080
