@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service
 import java.math.BigDecimal
 
 @Service
-class AccountService(private val accountRepository: AccountRepository) {
+class BalanceService(private val accountRepository: AccountRepository) {
 
     private val logger = getLogger(this::class.java)
 
