@@ -1,5 +1,5 @@
 #= Build ============================================================
-FROM adoptopenjdk/openjdk14:alpine-slim as build
+FROM adoptopenjdk/openjdk11:alpine-slim as build
 WORKDIR /app
 
 COPY build.gradle.kts .
@@ -12,7 +12,7 @@ RUN ./gradlew -Dorg.gradle.daemon=false :assemble
 RUN mkdir -p build/libs/dependency && (cd build/libs/dependency; jar -xf ../*.jar)
 
 #= Run ==============================================================
-FROM adoptopenjdk/openjdk14:alpine-slim
+FROM adoptopenjdk/openjdk11:alpine-slim
 
 VOLUME /tmp
 VOLUME /log
