@@ -44,5 +44,5 @@ jobs:
           path: build/libs
       - run: echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u doerfli --password-stdin
       - uses: rlespinasse/github-slug-action@v2.x
-      - run: docker buildx build --platform linux/arm64 -f Arm64.Dockerfile -t ghcr.io/doerfli/bankaccount:arm64_${{ env.GITHUB_REF_SLUG }} .
-      - run: docker push ghcr.io/doerfli/bankaccount:${{ env.GITHUB_REF_SLUG }}
+      - run: docker build --platform linux/arm64 -f Arm64.Dockerfile -t ghcr.io/doerfli/bankaccount:arm64_${{ env.GITHUB_REF_SLUG }} .
+      - run: docker push ghcr.io/doerfli/bankaccount:arm64_${{ env.GITHUB_REF_SLUG }}
