@@ -12,7 +12,7 @@ jobs:
           java-version: 11
       - uses: eskatos/gradle-command-action@v1
         with:
-          arguments: build
+          arguments: --no-daemon build
       - name: Archive production artifacts
         uses: actions/upload-artifact@v2
         with:
@@ -31,4 +31,18 @@ jobs:
       - run: echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u doerfli --password-stdin
       - uses: rlespinasse/github-slug-action@v2.x
       - run: docker build -f Dockerfile -t ghcr.io/doerfli/bankaccount:${{ env.GITHUB_REF_SLUG }} .
+      - run: docker push ghcr.io/doerfli/bankaccount:${{ env.GITHUB_REF_SLUG }}
+  dockerArm64:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Download built vue-app
+        uses: actions/download-artifact@v2
+        with:
+          name: bootjar
+          path: build/libs
+      - run: echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u doerfli --password-stdin
+      - uses: rlespinasse/github-slug-action@v2.x
+      - run: docker buildx build --platform linux/arm64 -f Arm64.Dockerfile -t ghcr.io/doerfli/bankaccount:arm64_${{ env.GITHUB_REF_SLUG }} .
       - run: docker push ghcr.io/doerfli/bankaccount:${{ env.GITHUB_REF_SLUG }}
