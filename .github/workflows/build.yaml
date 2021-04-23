@@ -19,6 +19,7 @@ jobs:
           name: bootjar
           path: build/libs
   docker:
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
