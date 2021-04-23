@@ -51,5 +51,5 @@ jobs:
         id: buildx
         uses: docker/setup-buildx-action@v1
       - run: echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u doerfli --password-stdin
-      - run: docker buildx build --platform linux/arm64 -f Arm64.Dockerfile -t ghcr.io/doerfli/bankaccount:arm64_${{ env.GITHUB_REF_SLUG }} .
-      - run: docker push ghcr.io/doerfli/bankaccount:arm64_${{ env.GITHUB_REF_SLUG }}
+      - run: docker buildx build --platform linux/arm64 -f Arm64.Dockerfile -t ghcr.io/doerfli/bankaccount:${{ env.GITHUB_REF_SLUG }}arm64 .
+      - run: docker push ghcr.io/doerfli/bankaccount:${{ env.GITHUB_REF_SLUG }}arm64
