@@ -1,11 +1,11 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-	id("org.springframework.boot") version "2.4.5"
+	id("org.springframework.boot") version "2.6.3"
 	id("io.spring.dependency-management") version "1.0.11.RELEASE"
-	kotlin("jvm") version "1.5.0-RC"
-	kotlin("plugin.spring") version "1.5.0-RC"
-	id("org.jetbrains.kotlin.plugin.jpa") version "1.5.0-RC"
+	kotlin("jvm") version "1.6.10"
+	kotlin("plugin.spring") version "1.6.10"
+	id("org.jetbrains.kotlin.plugin.jpa") version "1.6.10"
 }
 
 group = "li.doerf.es"
@@ -16,7 +16,7 @@ repositories {
 	mavenCentral()
 }
 
-extra["springCloudVersion"] = "2020.0.2"
+extra["springCloudVersion"] = "2021.0.0"
 
 dependencyManagement {
 	imports {
